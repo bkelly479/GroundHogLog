@@ -5,25 +5,21 @@ var bodyParser = require('body-parser');
 
 
 
-/* GET home page. */
+//add marker to database
 router.post('/', function(req, res, next) {
+  //vars for lat and lng
   var lat = req.body.lat;
   var lng = req.body.lng;
 
-  console.log("lat: " + lat);
-  console.log("lng: " + lng);
-
-  //console.log(req.body);
-
-
-
+console.log('error is in create');
   //add marker to the Database
   db.query('INSERT INTO markers(lat,lng) VALUES(' + lat + ' ,' + lng + ')', function(error, results, fields){
     if(error){
       console.log(error);
     }
   });
-  
+
+  //render page
   res.render('index', { title: 'Express' });
 });
 

@@ -21,6 +21,24 @@ function initMap(){
   //creates a default marker
   addMarker({lat:41.725823676814784,lng:-73.93422634397302})
 
+  //ajax call to populate all markers in the database
+  fetch('/getMarkers').then(function(response){
+    if(response.status !== 200){
+      console.log('problem with ajax call:' + response.status + ' msg: ' + response.value);
+    }else{
+      response.text().then(function(data){
+        var markersJSON = JSON.parse(data);
+
+        console.log(' recieved markers starting with: ' + markersJSON[0]);
+
+        for(var i = 0; i < markersJSON.length; i++){
+          addMarker({lat: markersJSON[i].lat, lng: markersJSON[i].lng});
+        };
+      });
+    }
+  });
+
+
 
 }
 
