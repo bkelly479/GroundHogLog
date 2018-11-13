@@ -9,7 +9,10 @@ html(lang='en')
         h1 Ground Hog Log
       .jumbotron(id='map' style='height:60vh; padding-top:5vh')
 
-      button.btn.btn-primary(type='button' onclick='createMarker()') Record Groundhog
+      form(id='logBttn' method='POST' action='/createMarker' Content-Type='multipart/form-data')
+        button.btn.btn-primary(type='submit' ) Record Groundhog
+        input(type='hidden' id='lat' name='lat' value='')
+        input(type='hidden' id='lng' name='lng' value='')
 
       script(src='javascripts/index.js')
       script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
