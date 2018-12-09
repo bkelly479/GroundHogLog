@@ -10,7 +10,25 @@ html(lang='en')
       .jumbotron(id='map' style='height:60vh; padding-top:5vh')
 
       form(id='logBttn' method='POST' action='/createMarker' Content-Type='multipart/form-data')
-        button.btn.btn-primary(type='submit' ) Record Groundhog
+        // Button trigger modal
+        button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModal')
+          | Record Groundhog
+        // Modal
+        #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+          .modal-dialog(role='document')
+            .modal-content
+              .modal-header
+                h5#exampleModalLabel.modal-title Add Image?
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+              .modal-body
+                 input(type='file', accept='image/*', capture='camera')
+              .modal-footer
+                //close modal
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                //save image
+                button.btn.btn-primary(type='button') Save changes
+
         input(type='hidden' id='lat' name='lat' value='')
         input(type='hidden' id='lng' name='lng' value='')
 

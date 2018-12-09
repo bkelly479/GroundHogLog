@@ -4,11 +4,20 @@ function initMap(){
   //map options
   var options = {
     zoom: 15,
+    //centered around Marist
     center: {lat:41.7237 , lng:-73.9337}
   }
 
   //create map called 'map'
   var map = new google.maps.Map(document.getElementById('map'), options);
+
+  //content string for marker dialogue boxes
+  var contentString;
+
+  //define infoWindow
+  var infoWindow = new google.maps.InfoWindow({
+    content: contentString
+  });
 
   //add marker function
   function addMarker(coords){
@@ -16,10 +25,18 @@ function initMap(){
       position: coords,
       map: map
     });
-  }
+
+    //event listener to bring up marker infoWindow
+    marker.addListener('click', function(){
+      infoWindow.setContent('<div id="content">' +
+          '<h4> Lat:' + coords.lat.toString() + '<br> Lng:' + coords.lng.toString() + '</h4>' +
+          '</div>');
+      infoWindow.open(map,marker);
+    });
+  };
 
   //creates a default marker
-  addMarker({lat:41.725823676814784,lng:-73.93422634397302})
+  addMarker({lat:41.725823676814784,lng:-73.93422634397302});
 
   //ajax call to populate all markers in the database
   fetch('/getMarkers').then(function(response){
@@ -40,7 +57,9 @@ function initMap(){
 
 
 
-}
+
+
+};
 
 
 //call /create marker with the position from getPos()

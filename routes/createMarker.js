@@ -11,7 +11,7 @@ router.post('/', function(req, res, next) {
   var lat = req.body.lat;
   var lng = req.body.lng;
 
-console.log('error is in create');
+
   //add marker to the Database
   db.query('INSERT INTO markers(lat,lng) VALUES(' + lat + ' ,' + lng + ')', function(error, results, fields){
     if(error){
