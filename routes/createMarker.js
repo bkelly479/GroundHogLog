@@ -31,11 +31,17 @@ router.post('/', upload.single('ghImg'), function(req, res, next) {
   //var for the pic
   var pic = req.file;
 
-  console.log(lat + ", " + lng + ", " + pic);
-  console.log(req.file);
-
+  var qry;
   //add marker to the Database
-  db.query('INSERT INTO markers(lat,lng) VALUES(' + lat + ' ,' + lng + ')', function(error, results, fields){
+  if(req.file === undefined){
+    qry = 'INSERT INTO markers(lat,lng) VALUES(' + lat + ' ,' + lng + ')';
+  }else{
+    qry ='INSERT INTO markers(lat,lng,imgname) VALUES(' + lat + ' ,' + lng + ', "' + pic.filename + '")';
+  }
+
+  console.log(qry);
+
+  db.query(qry, function(error, results, fields){
     if(error){
       console.log(error);
     }
