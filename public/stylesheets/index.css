@@ -1,0 +1,13 @@
+.videoPane{
+  height: 300px;
+  width: 400px;
+  background-color: red;
+}
+
+body{
+  background-color: red;
+}
+
+a{
+  margin: 10px,
+}

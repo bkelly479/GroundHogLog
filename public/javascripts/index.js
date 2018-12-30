@@ -46,7 +46,9 @@ function initMap(){
       response.text().then(function(data){
         var markersJSON = JSON.parse(data);
 
-        console.log(' recieved markers starting with: ' + markersJSON[0]);
+        //removed was there for testing purposes
+        //console.log(' recieved markers starting with: ' + markersJSON[0]);
+
 
         for(var i = 0; i < markersJSON.length; i++){
           addMarker({lat: markersJSON[i].lat, lng: markersJSON[i].lng});
@@ -91,6 +93,9 @@ function getPos(){
     alert("geolocation not enabled");
   }
 }
+
+
+
 
 window.onload = function(){
   getPos();

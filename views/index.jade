@@ -2,6 +2,7 @@ doctype html
 html(lang='en')
   head
     title Ground Hog Log
+    link(rel='stylesheet', href='stylesheets/index.css')
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
   body
     .container
@@ -9,11 +10,11 @@ html(lang='en')
         h1 Ground Hog Log
       .jumbotron(id='map' style='height:60vh; padding-top:5vh')
 
-      form(id='logBttn' method='POST' action='/createMarker' Content-Type='multipart/form-data')
+      form(id='logBttn' method='POST' action='/createMarker' enctype='multipart/form-data')
         // Button trigger modal
         button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModal')
           | Record Groundhog
-        // Modal
+          // Modal
         #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
           .modal-dialog(role='document')
             .modal-content
@@ -22,12 +23,19 @@ html(lang='en')
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') ×
               .modal-body
-                 input(type='file', accept='image/*', capture='camera')
+
+                input(type='file' name='ghImg' id='imgToBeAdded'  accept='image/*')
+
+
+
               .modal-footer
                 //close modal
                 button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
                 //save image
-                button.btn.btn-primary(type='button') Save changes
+                input.btn.btn-primary(type='submit', value='Submit')
+
+
 
         input(type='hidden' id='lat' name='lat' value='')
         input(type='hidden' id='lng' name='lng' value='')
