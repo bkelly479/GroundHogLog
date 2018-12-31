@@ -39,7 +39,7 @@ router.post('/', upload.single('ghImg'), function(req, res, next) {
     qry ='INSERT INTO markers(lat,lng,imgname) VALUES(' + lat + ' ,' + lng + ', "' + pic.filename + '")';
   }
 
-  console.log(qry);
+  //console.log(qry);
 
   db.query(qry, function(error, results, fields){
     if(error){

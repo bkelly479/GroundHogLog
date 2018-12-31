@@ -20,7 +20,7 @@ function initMap(){
   });
 
   //add marker function
-  function addMarker(coords){
+  function addMarker(coords, data){
     var marker = new google.maps.Marker({
       position: coords,
       map: map
@@ -28,9 +28,19 @@ function initMap(){
 
     //event listener to bring up marker infoWindow
     marker.addListener('click', function(){
-      infoWindow.setContent('<div id="content">' +
-          '<h4> Lat:' + coords.lat.toString() + '<br> Lng:' + coords.lng.toString() + '</h4>' +
-          '</div>');
+      if(coords.imgName === null){
+        infoWindow.setContent('<div id="content">'
+            +'<p> Lat:' + coords.lat.toString() + '<br> Lng:' + coords.lng.toString() + '</p>'
+            + '<p>Date Sighted: ' + data.datetime.toString() + '</p>'
+            + '</div>');
+      }else{
+        infoWindow.setContent('<div id="content">'
+            +'<p> Lat:' + coords.lat.toString() + '<br> Lng:' + coords.lng.toString() + '</p>'
+            +'<p>Date Sighted: ' + data.datetime.toString() + '</p>'
+            +'<img src="images/uploads/' + data.img.toString() + '" alt="Groundhog Image" >'
+            +'</div>');
+      }
+
       infoWindow.open(map,marker);
     });
   };
@@ -47,11 +57,12 @@ function initMap(){
         var markersJSON = JSON.parse(data);
 
         //removed was there for testing purposes
-        //console.log(' recieved markers starting with: ' + markersJSON[0]);
+        //console.log(' recieved markers starting with: ' + Object.entries(markersJSON[0]));
+
 
 
         for(var i = 0; i < markersJSON.length; i++){
-          addMarker({lat: markersJSON[i].lat, lng: markersJSON[i].lng});
+          addMarker({lat: markersJSON[i].lat, lng: markersJSON[i].lng}, {datetime: markersJSON[i].datetime , img: markersJSON[i].imgName});
         };
       });
     }
