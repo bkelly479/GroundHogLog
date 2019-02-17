@@ -28,7 +28,9 @@ function initMap(){
 
     //event listener to bring up marker infoWindow
     marker.addListener('click', function(){
-      if(coords.imgName === null){
+      console.log(coords);
+      console.log(data);
+      if(data.img === null){
         infoWindow.setContent('<div id="content">'
             +'<p> Lat:' + coords.lat.toString() + '<br> Lng:' + coords.lng.toString() + '</p>'
             + '<p>Date Sighted: ' + data.datetime.toString() + '</p>'
