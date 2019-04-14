@@ -48,7 +48,7 @@ function initMap(){
   };
 
   //creates a default marker
-  addMarker({lat:41.725823676814784,lng:-73.93422634397302});
+  //addMarker({lat:41.725823676814784,lng:-73.93422634397302});
 
   //ajax call to populate all markers in the database
   fetch('/getMarkers').then(function(response){
